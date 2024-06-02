@@ -48,7 +48,7 @@ public class User implements UserDetails {
     @CollectionTable(name="user_role",joinColumns = @JoinColumn(name = "id_user"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "user")
     private List<Video> videos = new ArrayList<>();
 
 

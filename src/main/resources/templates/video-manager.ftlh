@@ -4,7 +4,6 @@
     <title>Редактор видео</title>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="/static/css/style.css?version=51">
-    <script src ="/static/js/video-manage.js"></script>
 </head>
 <body>
             <h3>Добавить видео ${user.name}</h3>
@@ -27,15 +26,15 @@
             </form>
 
             <h3>Удалить видео</h3>
-            <form action="/video/delet" method="post">
+            <form action="/video/delet" method="post" enctype="multipart/form-data">
             <select name="id_video">
                 <option disabled>Выберите видео</option>
                 <#list user.getVideos() as video>
                     <option value="${video.id_video}">${video.title}</option>
                 </#list>
             </select>
-            <input style="cursor:pointer" type="submit" value="Удалить видео"/>
             <input type="hidden" name="_csrf" value="${_csrf.token}">
+            <input style="cursor:pointer" type="submit" value="Удалить видео"/>
             </form>
 </body>
 </html>
