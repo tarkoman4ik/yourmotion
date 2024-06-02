@@ -5,6 +5,7 @@ import com.example.youmotion.models.Video;
 import com.example.youmotion.repositories.UserRepository;
 import com.example.youmotion.repositories.VideoRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,13 +17,13 @@ import java.util.Optional;
 
 @Service
 @Slf4j
+@ToString
 @RequiredArgsConstructor
 public class VideoService {
     private final VideoRepository videoRepository;
     private final UserRepository userRepository;
 
     public List<Video> listVideos(String title) {
-        List<Video> videos = videoRepository.findAll();
         log.info("infofasdagSDASDadASDasdfasdfasfADSAFASDFA: {}",videoRepository.findByTitleContains(title));
         if (title!=null)
             return videoRepository.findByTitleContains(title);
@@ -55,9 +56,12 @@ public class VideoService {
        Optional<Video> videoOptional = videoRepository.findById(id_video);
        if (videoOptional.isPresent()) {
            Video video = videoOptional.get();
-           video.setTitle(title);
-           video.setDescription(description);
-           video.setPreview_image(file.getBytes());
+           if (!title.isEmpty())
+               video.setTitle(title);
+           if (!description.isEmpty())
+               video.setDescription(description);
+           if (!file.isEmpty())
+               video.setPreview_image(file.getBytes());
            videoRepository.save(video);
        }
     }

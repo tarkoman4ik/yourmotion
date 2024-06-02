@@ -132,10 +132,13 @@ body {
 }
 
 #sidebar {
+    display:flex;
 	width: 300px;
 	min-height: 700px;
 	margin: 10px;
 	background-color: #212121;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 #sidebar-content{

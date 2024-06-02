@@ -16,6 +16,9 @@
     <p>Ещё нет аккаунта? <a href="/registration">Создайте </a>его прямо сейчас!</p>
     <a style="color:black" href="/">← Назад</a>
 </form>
+<#if errorMessage??>
+<h3>${errorMessage}</h3>
+</#if>
 </div>
 </body>
 </html>

@@ -49,6 +49,12 @@ public class siteController {
         return "profile";
     }
 
+    @PostMapping("/profile/delete/{id_user}")
+    public String profileDelete(@PathVariable Long id_user) {
+        userService.deleteUser(id_user);
+        return "/login";
+    }
+
     @PostMapping("/video/delet")
     public String deleteVideoManager(@RequestParam(name="delete_id") Long id_video,Principal principal, Model model) throws IOException {
         int id_user = Math.toIntExact(videoService.getUserByPrincipal(principal).getId_user());
@@ -60,10 +66,24 @@ public class siteController {
         return "video-manager";
     }
 
+    @PostMapping("/profile/update/{id_user}")
+    public String updateUser(@PathVariable Long id_user,
+                             @RequestParam(name="channelname")String channelname, @RequestParam(name="name") String name,
+                             @RequestParam(name="surname") String surname,@RequestParam(name="description") String description,
+                             @RequestParam(name="country") String country,@RequestParam(name="file")MultipartFile file,
+                             Principal principal,Model model) throws IOException {
+        userService.UpdateUser(id_user,channelname,name,surname,description,country,file);
+        model.addAttribute("user",videoService.getUserByPrincipal(principal));
+        model.addAttribute("updateMessage","Профиль обновлен!");
+        return "profile-manager";
+    }
+
     @PostMapping("/video/update")
     public String updateVideo(@RequestParam(name="file") MultipartFile file,@RequestParam(name="update_id") Long id_video,@RequestParam(name="title") String title,@RequestParam(name="description") String description,Principal principal,Model model) throws IOException {
-        Path fileOld = Paths.get(uploadPath+"/" + videoService.getVideoById(id_video).getUser().getId_user() + "/" + videoService.getVideoById(id_video).getTitle()+".mp4");
-        Files.move(fileOld,fileOld.resolveSibling(title+".mp4"));
+        if (!title.isEmpty()) {
+            Path fileOld = Paths.get(uploadPath + "/" + videoService.getVideoById(id_video).getUser().getId_user() + "/" + videoService.getVideoById(id_video).getTitle() + ".mp4");
+            Files.move(fileOld, fileOld.resolveSibling(title + ".mp4"));
+        }
         videoService.UpdateVideo(id_video,title,description,file);
         model.addAttribute("user",videoService.getUserByPrincipal(principal));
         model.addAttribute("updateMessage","Видео обновлено!");
@@ -74,6 +94,12 @@ public class siteController {
     public String videoManage(Principal principal,Model model){
         model.addAttribute("user",videoService.getUserByPrincipal(principal));
         return "video-manager";
+    }
+
+    @GetMapping("/profile-manager")
+    public String profileManager(Principal principal,Model model){
+        model.addAttribute("user",videoService.getUserByPrincipal(principal));
+        return "profile-manager";
     }
 
     @GetMapping("/video/{id_video}")

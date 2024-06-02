@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 
@@ -25,11 +26,13 @@ public class Video {
     private int views = 0;
     @Column(name="upload")
     private LocalDateTime upload;
+    @ToString.Exclude
     @Basic
     @Column(name="preview_image",nullable = false,columnDefinition ="LONGBLOB")
     private byte[] preview_image;
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
+    @ToString.Exclude
     private User user;
 
     @PrePersist

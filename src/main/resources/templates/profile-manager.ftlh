@@ -6,30 +6,21 @@
     <link rel="stylesheet" type="text/css" href="/static/css/style.css?version=51">
 </head>
 <body>
-            <h3>Изменить видео</h3>
-            <form action="/video/update" method="post" enctype="multipart/form-data">
-            <select name="update_id">
-                <option disabled>Выберите видео</option>
-                <#list user.getVideos() as video>
-                    <option value="${video.id_video}">${video.title}</option>
-                </#list>
-            </select>
-            Название видео: <input type="text" name="title"><br><br>
-            Описание видео: <textarea type="text" name="description"></textarea><br><br>
-            Превью видео: <input type="file" name="file"><br><br>
+            <h3>Изменить профиль</h3>
+            <form action="/profile/update/${user.id_user}" method="post" enctype="multipart/form-data">
+            Название канала: <input type="text" name="channelname"><br><br>
+            Имя пользователя: <input type="text" name="name"><br><br>
+            Фамилия пользователя: <input type="text" name="surname"><br><br>
+            Описание канала: <textarea type="text" name="description"></textarea><br><br>
+            Страна: <input type="text" name="country"><br><br>
+            Смена аватара: <input type="file" name="file"><br><br>
             <input type="hidden" name="_csrf" value="${_csrf.token}">
-            <input type="submit" style="cursor:pointer" value="Изменить видео"/>
+            <input type="submit" style="cursor:pointer" value="Изменить профиль"/>
             </form>
-            <h3>Удалить видео</h3>
-            <form action="/video/delet" method="post" enctype="multipart/form-data">
-            <select name="delete_id">
-                <option disabled>Выберите видео</option>
-                <#list user.getVideos() as video>
-                    <option value="${video.id_video}">${video.title}</option>
-                </#list>
-            </select>
+            <h3>Удалить пользователя(Это действие нельзя отменить!)</h3>
+            <form action="/profile/delete/${user.id_user}" method="post" enctype="multipart/form-data">
             <input type="hidden" name="_csrf" value="${_csrf.token}">
-            <input style="cursor:pointer" type="submit" value="Удалить видео"/>
+            <input style="cursor:pointer" type="submit" value="Удалить пользователя"/>
             </form>
             <div>
                 <#if deleteMessage??>
@@ -37,9 +28,6 @@
                 </#if>
                 <#if updateMessage??>
                 <h1>${updateMessage}</h1>
-                </#if>
-                <#if createMessage??>
-                <h1>${createMessage}</h1>
                 </#if>
             </div>
 </body>
