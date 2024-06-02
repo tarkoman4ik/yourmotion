@@ -10,9 +10,6 @@
 <h1>Регистрация</h1>
 <form id="registerForm" action="/registration" method="post" enctype="multipart/form-data">
     Имя канала: <input type="text" name="channelname"><br>
-    Имя пользователя: <input type="text" name="name"><br>
-    Фамилия пользователя: <input type="text" name="surname"><br>
-    Страна: <input type="text" name="country"><br>
     Эл.почта: <input type="email" name="mail"><br>
     Пароль: <input type="password" name="password"><br>
     <input type="hidden" name="_csrf" value="${_csrf.token}">

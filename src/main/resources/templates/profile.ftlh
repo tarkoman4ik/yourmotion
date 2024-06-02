@@ -13,7 +13,7 @@
         <div id="BottomHeader" style="margin-left: 250px;">
         <form action="/" method="get">
             <input style="width: 650px; height:45px; color: white;" type="text" name="title" placeholder="Введите запрос" autocomplete="off">
-            <input  style="width: 45px; height:45px; color:white;font-size: 18px; padding: 0px" type="submit" value="🔎︎"/>
+            <input style="width: 45px; height:45px; color:white;font-size: 18px; padding: 0px" type="submit" value="🔎︎"/>
             <input type="hidden" name="_csrf" value="${_csrf.token}">
         </form>
         <#if user.mail??>
@@ -34,7 +34,7 @@
             Ваш канал
             </h1>
             </a>
-            _________________________________________
+            ___________________________________
             <h1 style="text-align: center;margin-top:15px;margin-bottom:15px;"><a style="color:white;text-weight:bold"href="/profile/${owner.id_user}">${user.channelname}</a></h1>
             <form action="/logout" method="post">
                   <input type="hidden" name="_csrf" value="${_csrf.token}">
@@ -58,7 +58,7 @@
             ___________________________________
             <h3 id="auth" style="text-align:center; margin-top: 20px"><a style="color:white" href="/login">Войти в аккаунт</a></h3>
             </#if>
-            _________________________________________
+            ___________________________________
             <#if user.mail??>
             <#if user.id_user==owner.id_user>
             <h3 style="margin-top:15px;margin-bottom:5px;">Редакторы</h3>
@@ -71,14 +71,21 @@
             <p>yourmotion.ru  &copy; 2024-2025. Saar Fedor</p>
             </div>
         </div>
-            <div>
+            <div style="display:flex;flex-direction:column">
+            <div id="userSubs" style="margin-bottom:18px">
+            <a href="/profile/${owner.id_user}"><img style="border-radius: 25px; width: 150px; height:150px; margin-left: 50px;" src="/avatar/${owner.id_user}"></a>
+            <div id="userName" style="justify-content:center">
+            <h1 style="margin-left:35px"><a style="color:white; font-size: 48px;"href="/profile/${owner.id_user}">${owner.channelname}</a></h1>
+            <p style="font-size:18px">${owner.subscribers} подписчиков</p>
+            </div>
+            </div>
             ____________________________________________________________________________________________________________________________________________________________________
             <h3 style="margin-top:15px;margin-left:15px;">Видео</h3>
             <div id="Catalog" style="width: 1565px; height: 900px;">
             <#list videos as video>
                 <div id="block" style="width: 380px; margin-top:20px">
                 <a href="/video/${video.id_video}">
-                <img alt="vid_preview" style="width:350px;height:200px; border-radius: 15px" src="/image/${video.id_video}">
+                <img alt="vid_preview" style="background-color: #313131;width:350px;height:200px; border-radius: 15px" src="/image/${video.id_video}">
                 <div id="userSubs">
                 <div id="userName">
                 <h2 style="color:white; margin-left:15px;">${video.title}</h2>

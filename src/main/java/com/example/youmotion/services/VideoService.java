@@ -51,6 +51,17 @@ public class VideoService {
         return videoRepository.findById(id_video).orElse(null);
     }
 
+    public void UpdateVideo(Long id_video,String title, String description, MultipartFile file) throws IOException {
+       Optional<Video> videoOptional = videoRepository.findById(id_video);
+       if (videoOptional.isPresent()) {
+           Video video = videoOptional.get();
+           video.setTitle(title);
+           video.setDescription(description);
+           video.setPreview_image(file.getBytes());
+           videoRepository.save(video);
+       }
+    }
+
     public void UpdateViews(Long id_video){
         Optional<Video> videoOptional = videoRepository.findById(id_video);
         if (videoOptional.isPresent()) {

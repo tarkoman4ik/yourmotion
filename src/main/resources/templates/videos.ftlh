@@ -58,7 +58,7 @@
             <#list videos as video>
                 <div id="block" style="width: 380px; margin-top:20px">
                 <a href="/video/${video.id_video}">
-                <img alt="vid_preview" style="width:350px;height:200px; border-radius: 15px" src="/image/${video.id_video}">
+                <img alt="vid_preview" style="background-color: #313131;width:350px;height:200px; border-radius: 15px" src="/image/${video.id_video}">
                 <div id="userSubs">
                 <img style="border-radius: 15px;" src="/avatar/${video.getUser().getId_user()}">
                 <div id="userName">

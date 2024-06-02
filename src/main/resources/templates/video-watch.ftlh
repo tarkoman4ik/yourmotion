@@ -75,10 +75,6 @@
                     <br>
                     <h3 style="margin-top:10px">${video.description}</h3>
                 </div>
-                            <form action="/video/delete/${video.id_video}" method="post" enctype="multipart/form-data">
-                            <input type="hidden" name="_csrf" value="${_csrf.token}">
-                            <input style="cursor:pointer" type="submit" value="Удалить видео"/>
-                            </form>
             </div>
         </div>
         </div>

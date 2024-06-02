@@ -28,7 +28,7 @@ public class Video {
     @Basic
     @Column(name="preview_image",nullable = false,columnDefinition ="LONGBLOB")
     private byte[] preview_image;
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 
