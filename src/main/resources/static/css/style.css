@@ -1,0 +1,241 @@
+body,
+p,
+h1,
+h3,
+h4,
+h5,
+ul {
+	margin: 0;
+	font-family: sans-serif;
+	padding: 0;
+}
+
+h2 {
+	color: white;
+	margin: 0;
+	font-size: 18px;
+}
+
+p {
+	margin: 0;
+	color: #bbbbbb;
+	font-size: 14px;
+	margin-left: 35px;
+}
+
+body {
+	background-color: #212121;
+	color:white;
+}
+
+.subscribeButton {
+    margin: 10px 20px;
+    width: 120px;
+    height: 50px;
+    border-radius: 35px;
+    font-size: 14px;
+    font-weight: bold;
+}
+#onlyvideo{
+    max-width: 1280px;
+}
+
+#videowatch{
+    width: 1280px;
+	display: flex;
+	word-break: break-all;
+	flex-direction: column;
+	margin-left: 50px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+#videowatch img {
+	padding: 0;
+	width: 55px;
+	height: 55px;
+	margin: 5px;
+}
+
+#userSubs{
+    display:flex;
+}
+#userName{
+    display:flex;
+    flex-direction:column;
+}
+
+#videowatch p{
+	margin: 0;
+	color: #bbbbbb;
+	font-size: 14px;
+	margin-left: 15px;
+}
+
+#videowatch h2 {
+    color: white;
+    margin-top: 15px;
+    margin-left: 15px;
+    font-size: 18px;
+}
+
+#headerMainImage{
+	border: 12px solid black;
+	height: 160px;
+	width: 600px;
+	background-color: white;
+	border-radius: 80px;
+}
+
+#puzzleFilters a:link,
+#puzzleFilters a:visited{
+	text-decoration: none;
+	color: black;
+}
+
+#puzzleFilters a:hover{
+	color: red;
+}
+
+#MainHeader {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 80px;
+	background-color: #212121;
+	color: white;
+}
+
+#BottomHeader{
+	display: flex;
+	height: 50px;
+	margin: 20px;
+	background-color: #212121;
+	width: 1366px;
+	margin-left: 150px;
+	align-items: center;
+	text-align: center;
+}
+
+#wrapper {
+	display: flex;
+	flex-wrap: wrap;
+	background-color: #ffffff;
+	margin: 0 auto;
+}
+
+#footer {
+	background-color: #242424;
+	width: 1366px;
+	height: 200px;
+	color: white;
+}
+
+#sidebar {
+	width: 300px;
+	min-height: 700px;
+	margin: 10px;
+	background-color: #212121;
+}
+
+#sidebar-content{
+    min-height: 800px;
+}
+
+#content {
+	display: flex;
+	background-color: #212121;
+}
+
+#copyright {
+	background-color: #242424;
+	padding: 10px;
+	width: 1366px;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+#puzzleFilters p {
+	font-size: 20px;
+	margin-bottom: 20px;
+	margin-top: 10px;
+}
+
+#auth a:hover,a:visited{
+    text-decoration: none;
+    color: white;
+}
+
+input{
+	background-color: #212121;
+	width: 635px;
+	height: 30px;
+	font-size: 18px;
+	padding-left: 15px;
+	border: 1px solid #323232;
+	border-radius: 20px;
+}
+.end input{
+	padding: 5px;
+	height: 20px;
+	border: 1px solid gray;
+	width: 35px;
+	border-radius: 10px 10px 10px 10px;
+}
+
+.rangetext {
+	display: flex;
+	color: gray;
+}
+
+#block {
+	margin-bottom: 10px;
+}
+
+#puzzleFilters li {
+	margin: 5px 5px;
+	list-style-type: none;
+}
+#Catalog{
+	display: flex;
+	background-color: #212121;
+	flex-wrap: wrap;
+}
+
+#Catalog br {
+    margin: 10px 0;
+}
+
+#Catalog img {
+	padding: 0;
+	width: 35px;
+	height: 35px;
+	margin: 5px;
+}
+
+span{
+	display: inline-flex;
+	justify-content: flex-start;
+	width: 250px;
+	height: 400px;
+	align-items: center;
+	flex-direction: column;
+	padding: 25px;
+	margin: 20px 20px;
+	border: 1px solid black;
+	border-radius: 12px;
+	text-align: center;
+}
+
+#content a:link,
+#content a:visited{
+	text-decoration: none;
+	color: black;
+}
+
+a.homepage {
+
+}
