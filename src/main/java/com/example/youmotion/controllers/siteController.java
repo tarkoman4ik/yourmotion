@@ -36,6 +36,7 @@ public class siteController {
 
     @GetMapping("/")
     public String videos(@RequestParam(name="title",required = false) String title, Principal principal,Model model) {
+        model.addAttribute("subscribers",videoService.listSubscribes());
         model.addAttribute("videos",videoService.listVideos(title));
         model.addAttribute("user",videoService.getUserByPrincipal(principal));
         return "videos";
@@ -43,6 +44,7 @@ public class siteController {
 
     @GetMapping("/profile/{id_user}")
     public String profile(@PathVariable Long id_user,Principal principal,Model model){
+        model.addAttribute("subscribers",videoService.listSubscribes());
         model.addAttribute("videos",userService.getUserById(id_user).getVideos());
         model.addAttribute("user",videoService.getUserByPrincipal(principal));
         model.addAttribute("owner",userService.getUserById(id_user));
@@ -102,9 +104,46 @@ public class siteController {
         return "profile-manager";
     }
 
+    @PostMapping("/comm/add/{id_video}")
+    public String createComment(@PathVariable Long id_video,Principal principal,@RequestParam(name="comment") String comment,Model model){
+        if (!comment.isEmpty())
+            videoService.saveComment(id_video,comment,videoService.getUserByPrincipal(principal).getChannelname(),videoService.getUserByPrincipal(principal).getId_user());
+        model.addAttribute("subscribers",videoService.listSubscribes());
+        model.addAttribute("videos",videoService.listVideos(null));
+        model.addAttribute("comments",videoService.listComments());
+        model.addAttribute("video",videoService.getVideoById(id_video));
+        model.addAttribute("user",videoService.getUserByPrincipal(principal));
+        return "video-watch";
+    }
+
+    @PostMapping("/subscribe/create/{id_video}")
+    public String createSubscribe(@PathVariable Long id_video,Principal principal,Model model){
+        videoService.saveSubscribe(id_video,videoService.getUserByPrincipal(principal));
+        model.addAttribute("subscribers",videoService.listSubscribes());
+        model.addAttribute("videos",videoService.listVideos(null));
+        model.addAttribute("comments",videoService.listComments());
+        model.addAttribute("video",videoService.getVideoById(id_video));
+        model.addAttribute("user",videoService.getUserByPrincipal(principal));
+        return "video-watch";
+    }
+
+    @PostMapping("/subscribe/delete/{id_video}")
+    public String deleteSubscribe(@PathVariable Long id_video,Principal principal,Model model){
+        videoService.deleteSubscribe(id_video,videoService.getUserByPrincipal(principal));
+        model.addAttribute("subscribers",videoService.listSubscribes());
+        model.addAttribute("videos",videoService.listVideos(null));
+        model.addAttribute("comments",videoService.listComments());
+        model.addAttribute("video",videoService.getVideoById(id_video));
+        model.addAttribute("user",videoService.getUserByPrincipal(principal));
+        return "video-watch";
+    }
+
     @GetMapping("/video/{id_video}")
     public String videoWatch(@PathVariable Long id_video,Principal principal,Model model){
         videoService.UpdateViews(id_video);
+        model.addAttribute("subscribers",videoService.listSubscribes());
+        model.addAttribute("videos",videoService.listVideos(null));
+        model.addAttribute("comments",videoService.listComments());
         model.addAttribute("video",videoService.getVideoById(id_video));
         model.addAttribute("user",videoService.getUserByPrincipal(principal));
         return "video-watch";

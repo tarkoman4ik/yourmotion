@@ -48,6 +48,16 @@
             _________________________________________
             <#if user.mail??>
             <h3 style="margin-top:15px;margin-bottom:5px;">Подписки</h3>
+            <#list subscribers as sbs>
+                <#if sbs.id_sub == user.id_user>
+                <div id="userSubs" style="margin-top:10px;margin-bottom:10px">
+                <a href="/profile/${sbs.id_user}"><img style="border-radius: 25px;width:50px;height:50px;" src="/avatar/${sbs.id_user}"></a>
+                <div id="userName" style="margin-top:15px">
+                <a href="/profile/${sbs.id_user}"><h2 style="color:white; margin-left:15px;">${sbs.username}</h2></a>
+                </div>
+                </div>
+                </#if>
+            </#list>
             </#if>
             </div>
             <div>

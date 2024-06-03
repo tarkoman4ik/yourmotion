@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="videos")
@@ -30,6 +32,8 @@ public class Video {
     @Basic
     @Column(name="preview_image",nullable = false,columnDefinition ="LONGBLOB")
     private byte[] preview_image;
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "vid")
+    private List<Comment> comments = new ArrayList<>();
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     @ToString.Exclude

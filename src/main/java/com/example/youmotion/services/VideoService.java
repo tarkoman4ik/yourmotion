@@ -1,7 +1,11 @@
 package com.example.youmotion.services;
 
+import com.example.youmotion.models.Comment;
+import com.example.youmotion.models.Subscribe;
 import com.example.youmotion.models.User;
 import com.example.youmotion.models.Video;
+import com.example.youmotion.repositories.CommentRepository;
+import com.example.youmotion.repositories.SubscribeRepository;
 import com.example.youmotion.repositories.UserRepository;
 import com.example.youmotion.repositories.VideoRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,12 +26,18 @@ import java.util.Optional;
 public class VideoService {
     private final VideoRepository videoRepository;
     private final UserRepository userRepository;
+    private final CommentRepository commentRepository;
+    private final SubscribeRepository subscribeRepository;
 
     public List<Video> listVideos(String title) {
         log.info("infofasdagSDASDadASDasdfasdfasfADSAFASDFA: {}",videoRepository.findByTitleContains(title));
         if (title!=null)
             return videoRepository.findByTitleContains(title);
         return videoRepository.findAll();
+    }
+
+    public List<Comment> listComments(){
+        return  commentRepository.findAll();
     }
 
     public void saveVideo(Principal principal, String title, String description, MultipartFile file) throws IOException{
@@ -37,6 +47,15 @@ public class VideoService {
         video.setDescription(description);
         video.setUser(getUserByPrincipal(principal));
         videoRepository.save(video);
+    }
+
+    public void saveComment(Long id_video,String comment, String username,Long id_user) {
+        Comment comm = new Comment();
+        comm.setMessage(comment);
+        comm.setUsername(username);
+        comm.setId_user(id_user);
+        comm.setVid(videoRepository.findById(id_video).get());
+        commentRepository.save(comm);
     }
 
     public User getUserByPrincipal(Principal principal) {
@@ -73,5 +92,28 @@ public class VideoService {
             video.setViews(video.getViews() + 1);
             videoRepository.save(video);
         }
+    }
+
+    public void saveSubscribe(Long id_video, User user) {
+        Subscribe sub = new Subscribe();
+        sub.setUsername(getVideoById(id_video).getUser().getChannelname());
+        sub.setId_user(getVideoById(id_video).getUser().getId_user());
+        sub.setSubname(user.getChannelname());
+        sub.setId_sub(user.getId_user());
+        subscribeRepository.save(sub);
+    }
+
+    public List<Subscribe> listSubscribes() {
+        return subscribeRepository.findAll();
+    }
+
+    public void deleteSubscribe(Long id_video, User user) {
+        Subscribe sub = new Subscribe();
+        List<Subscribe> ls = listSubscribes();
+        for (Subscribe elem : ls){
+            if (elem.getId_user()==videoRepository.findById(id_video).get().getUser().getId_user()&&elem.getId_sub()==user.getId_user())
+                sub = elem;
+        }
+        subscribeRepository.delete(sub);
     }
 }

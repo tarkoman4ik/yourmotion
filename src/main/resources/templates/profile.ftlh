@@ -75,12 +75,18 @@
             <#list owner.getVideos() as cntvid>
                 <#assign count = count + 1>
             </#list>
+            <#assign countsbs=0>
+            <#list subscribers as sbs>
+                <#if sbs.id_user == owner.id_user>
+                <#assign countsbs = countsbs + 1>
+                </#if>
+            </#list>
             <div style="display:flex;flex-direction:column">
             <div id="userSubs" style="margin-bottom:18px">
             <a href="/profile/${owner.id_user}"><img style="border-radius: 80px; width: 150px; height:150px; margin-left: 50px;" src="/avatar/${owner.id_user}"></a>
             <div id="userName" style="justify-content:center">
             <h1 style="margin-left:35px"><a style="color:white; font-size: 48px;"href="/profile/${owner.id_user}">${owner.channelname}</a></h1>
-            <p style="font-size:18px">${owner.subscribers} подписчиков • ${count} видео</p>
+            <p style="font-size:18px">${countsbs} подписчиков • ${count} видео</p>
             </div>
             </div>
             ____________________________________________________________________________________________________________________________________________________________________
